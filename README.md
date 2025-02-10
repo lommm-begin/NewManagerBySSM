@@ -1,0 +1,2 @@
+# NewManagerBySSM
+将之前的javaweb项目换成了SSM框架
