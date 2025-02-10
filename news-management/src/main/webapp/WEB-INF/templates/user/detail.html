@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>新闻中心-内容详情</title>
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/header.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/detail.css}">
+
+</head>
+<body>
+	<header>
+		<span class="span-head">新闻管理系统</span>
+		<div class="header-search">
+			<form class="header-form" th:action="@{/admin/Search}">
+				<div class="search">
+					<div>
+						<select name="row" style="height: 30px; width: 60px; border-radius: 8px; border: none; background: none">
+							<option value="all" selected>全部：</option>
+							<option value="title">标题：</option>
+							<option value="author">作者：</option>
+							<option value="content">内容：</option>
+						</select>
+						<input type="text" class="text-search" name="keyword" maxlength="50" style="font-size: 15px;">
+					</div>
+					<div>
+						<input type="submit" value="搜索" class="butt">
+					</div>
+				</div>	
+			</form>
+		</div>
+		<div class="ulf">
+			<ul>
+				<li><a th:href="@{/user/allNew}" class="header-text">所有新闻</a></li>
+					
+				<li><a th:href="@{/user/login}" class="header-text">后台管理</a></li>
+			</ul>
+		</div>
+		<div style="clear:both;"></div>
+	</header>
+	<div class="center">
+		<!-- 显示ID -->
+		<div style="position: absolute; padding-left: 37px; color: #6A2CFF; font-weight: 600; font-size: 19px;">
+			(编号：<span th:text="${id}"></span>)
+		</div>
+
+		<!-- 遍历并显示新闻列表 -->
+		<div th:if="${allist != null}" th:each="all : ${allist}" class="all-row">
+			<div class="one row">
+				<div class="all-title all all-left">新闻标题</div>
+				<div class="all-right all" th:text="${all.title}"></div>
+			</div>
+			<div class="two row">
+				<div class="all-type all all-left">新闻类型</div>
+				<div class="all-right all" th:text="${all.type}"></div>
+			</div>
+			<div class="one row">
+				<div class="all-author all all-left">作者信息</div>
+				<div class="all-right all" th:text="${all.author}"></div>
+			</div>
+			<div class="two row context">
+				<div class="all-context all all-left">新闻内容</div>
+				<div class="all-right all all-right-context" th:text="${all.content}"></div>
+			</div>
+			<div class="one row">
+				<div class="all-time all all-left">新闻时间</div>
+				<div class="all-right all" th:text="${all.actualTime}"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

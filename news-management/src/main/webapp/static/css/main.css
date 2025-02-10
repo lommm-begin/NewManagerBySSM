@@ -1,0 +1,95 @@
+ .center {
+    width: 1200px;
+}
+
+.all-row {
+    width: 1100px;
+    height: 450px;
+    margin: 25px auto;
+}
+
+.row {
+    display: flex;
+}
+
+.all {
+    height: 33px;
+    font-size: 16px;
+    text-align: center;
+    line-height: 33px;
+    border-right: 2px solid #828282;
+    overflow: hidden;
+}
+
+.show-search {
+	border-right: none;
+}
+
+.all-title {
+    width: 770px;
+    overflow: hidden;
+}
+
+.first {
+    font-size: 20px;
+    font-weight: 600px ;
+}
+
+.all-author {
+    width: 210px;
+}
+
+.all-type {
+    width: 210px;
+}
+
+.all-time {
+    width: 600px;
+}
+
+.all-edit {
+    border: none;
+}
+
+.all-del, .all-edit {
+    width: 180px;
+}
+
+.first-div {
+	width: calc(1100px - 17px);
+    background-color: #FFB43E;
+    border: none;
+    box-sizing: border-box;
+}
+
+.border-time {
+	border-right: none;
+}
+
+.one {
+    background-color: #DBDBDB;
+}
+
+.two {
+    background-color: #ABD9B0;
+}
+
+.fail {
+    width: 200px;
+    height: 30px;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-radius: 16px;
+    background-color: #df4444;
+    color: #F2F2F2;
+    text-align: center;
+    line-height: 30px
+}
+
+.admin-time {
+	border-right: 2px solid #828282;
+}
+
+.a-title {
+	display: inline-block;
+}

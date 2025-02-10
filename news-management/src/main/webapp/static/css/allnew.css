@@ -1,0 +1,61 @@
+.center {
+    width: 1200px;
+}
+
+.all-row {
+    width: 1100px;
+    height: 450px;
+    margin: 25px auto;
+}
+
+.row {
+    display: flex;
+}
+
+.all {
+    height: 33px;
+    font-size: 16px;
+    text-align: center;
+    line-height: 33px;
+    border-right: 2px solid #828282;
+    text-overflow: ellipsis;
+}
+
+.first {
+    font-size: 20px;
+}
+
+.all-title {
+    width: 770px;
+    overflow: hidden;
+}
+
+.first-title {
+	width: calc(770px - 59px);
+}
+
+.all-author {
+    width: 210px;
+}
+
+.all-type {
+    width: 210px;
+}
+
+.all-time {
+    width: 600px;
+    border: none;
+}
+
+.first-div {
+	display: flex;
+    background-color: #FFB43E;
+}
+
+.one {
+    background-color: #DBDBDB;
+}
+
+.two {
+    background-color: #ABD9B0;
+}

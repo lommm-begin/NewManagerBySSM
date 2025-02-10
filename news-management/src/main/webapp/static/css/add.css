@@ -1,0 +1,78 @@
+h2 {
+	text-align: center;
+	color: orange;
+}
+
+.add-news-form {
+    margin: 20px;
+
+}
+
+.add-news-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.add-news-form input[type="text"],
+.add-news-form textarea,
+.add-news-form select {
+    width: 540px;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.add-news-form button {
+    padding: 10px 20px;
+}
+
+#newsType {
+	width: 557px;
+}
+
+.center {
+    height: 570px;
+    width: 600px;
+}
+
+.but-all {
+    display: flex;
+    flex-direction: row;
+}
+
+.but {
+    display: block;
+    height: 40px;
+    width: 100px;
+    margin-right: 15px;
+    border-radius: 16px;
+    border: none;
+    font-size: 16px;
+    color: #353536;
+    text-align: center;
+    line-height: 40px;
+    
+}
+
+.first-but {
+    background-color: orange;
+}
+
+.two-but {
+    background-color: #21FF15;
+}
+
+.time {
+    width: 310px;
+    color: #3C3D3A;
+    background-color: #02ABFF;
+    border-radius: 8px;
+    margin-left: 18px;
+    font-weight: 600;
+}
+
+input, #newsContent, #newsType {
+	border: 2px solid orange;
+	border-radius: 8px;
+	outline: 0;
+}
+

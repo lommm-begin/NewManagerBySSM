@@ -1,0 +1,58 @@
+.center {
+    height: 540px;
+}
+
+.all-row {
+    width: 1100px;
+    height: 550px;
+    margin: 30px;
+    overflow: auto;
+    border-radius: 10px;
+}
+
+.row {
+    display: flex;
+}
+
+.all {
+    height: 42px;
+    width: 120px;
+    line-height: 42px;
+}
+
+.all-left {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.context {
+    height: 300px;
+}
+
+.all-context {
+    height: inherit;
+}
+
+.all-right-context {
+    overflow: auto;
+    height: inherit;
+    padding: 9px;
+    box-sizing: border-box;
+}
+
+.all-right{
+    border-left: 2px solid #6E6E6E;
+    padding-left: 9px;
+    width: 750px;
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+.one {
+    background-color: #FFAB34;
+}
+
+.two {
+    background-color: #ABD9B0;
+}

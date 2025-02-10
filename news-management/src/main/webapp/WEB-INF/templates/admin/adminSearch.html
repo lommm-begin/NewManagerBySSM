@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>新闻中心-管理员-搜索结果</title>
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/header.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/search.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/main.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/login-message.css}">
+</head>
+<body>
+	<header>
+		<span class="span-head">新闻管理系统</span>
+		<div class="header-search">
+			<form class="header-form" th:action="@{/admin/Search}">
+				<div class="search">
+					<div>
+						<select name="row" style="height: 30px; width: 60px; border-radius: 8px; border: none; background: none;">
+							<option value="all" selected>全部：</option>
+							<option value="title">标题：</option>
+							<option value="author">作者：</option>
+							<option value="content">内容：</option>
+						</select>
+						<input type="text" class="text-search" name="keyword" maxlength="50" style="font-size: 15px;" th:value="${keyword}">
+					</div>
+					<div>
+						<input type="submit" value="搜索" class="butt">
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="ulf">
+			<ul>
+				<li><a th:href="@{/admin/main}" class="header-text fresh">所有新闻</a></li>
+				<li><a th:href="@{/admin/addNew}" class="header-text">添加新闻</a></li>
+				<li><a th:href="@{/user/login}" class="header-text">系统登录</a></li>
+				<li><a th:href="@{/}" class="header-text">新闻主页</a></li>
+			</ul>
+		</div>
+		<div style="clear:both;"></div>
+	</header>
+	<div class="big-left">
+		<div class="admin-message">
+			<div class="hello">欢迎你:</div>
+			<span class="adminname" th:text="${session.adminname}"></span>
+			<div class="box"></div>
+			<div class="login-time"><a th:href="@{/admin/exit}">退出登录</a></div>
+		</div>
+	</div>
+	<div class="center">
+		<!-- 这里写内容 -->
+		<div class="all-row">
+			<div class="row one" style="background-color: orange;">
+				<div class="all-title all first">新闻标题</div>
+				<div class="all-author all first">作者信息</div>
+				<div class="all-time all first admin-time">发布时间</div>
+				<div class="all-del all first">是否删除</div>
+				<div class="all-edit all first">是否编辑</div>
+			</div>
+			<div style="overflow: auto; height: 400px;">
+				<div class="row" th:if="${allist != null and not #lists.isEmpty(allist)}"
+					 th:each="all, iterStat : ${allist}"
+					 th:classappend="${iterStat.odd}? 'a-one two' : 'a-two one'">
+					<div class="all-title all">
+						<a th:href="@{'/user/detail/' + ${all.id}}" class="detail a-two"
+						   th:text="${all.title}">新闻标题</a>
+					</div>
+					<div class="all-author all a-two" th:text="${all.author}">作者信息</div>
+					<div class="all-time all admin-time a-two" th:text="${all.time}">发布时间</div>
+					<div class="all-del all a-two">
+						<a th:href="@{'/admin/deleteNew/' + ${all.id}}" class="detail">删除</a>
+					</div>
+					<div class="all-edit all a-two">
+						<a th:href="@{'/admin/editNew?id=' + ${all.id}}" class="detail">编辑</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- 如果allist为空时显示的消息 -->
+			<div th:if="${allist == null or #lists.isEmpty(allist)}" class="show-search first-div all">
+				您搜索的新闻关键字不存在！
+			</div>
+		</div>
+	</div>
+</body>
+</html>

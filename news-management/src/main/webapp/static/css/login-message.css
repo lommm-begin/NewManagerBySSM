@@ -1,0 +1,34 @@
+.big-left {
+    width: 160px;
+    height: 220px;
+    position: absolute;
+    top: 100px;
+    left: 10px;
+    text-align: center;
+    border-radius: 16px;
+    background-color: white;
+    box-shadow: darkgrey 0 0 20px 5px;
+    box-sizing: border-box;
+}
+
+.hello, .login-time {
+    color: orange;
+}
+
+.hello {
+    margin-top: 20px;
+}
+
+.box {
+    height: 40px;
+    border-bottom: 1px solid orange;
+}
+
+.login-time {
+    margin-top: 48px;
+}
+
+.adminname {
+	font-size: 17px;
+	font-weight: 600;
+}

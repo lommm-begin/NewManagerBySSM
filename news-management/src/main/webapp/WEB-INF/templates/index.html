@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>新闻中心-主页</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/allnew.css}">
+</head>
+<body>
+<header>
+    <span class="span-head">新闻管理系统</span>
+    <div class="header-search">
+        <form class="header-form" th:action="@{/admin/Search}">
+            <div class="search">
+                <div>
+                    <select name="row" style="height: 30px; width: 60px; border-radius: 8px; border: none; background: none;">
+                        <option value="all" selected>全部：</option>
+                        <option value="title">标题：</option>
+                        <option value="author">作者：</option>
+                        <option value="content">内容：</option>
+                    </select>
+                    <input type="text" class="text-search" name="keyword" maxlength="50" style="font-size: 15px;">
+                </div>
+                <div>
+                    <input type="submit" value="搜索" class="butt">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="ulf">
+        <ul>
+            <li><a th:href="@{/}" class="header-text fresh">刷新</a></li>
+            <li><a th:href="@{/user/allNew}" class="header-text">所有新闻</a></li>
+            <li><a th:href="@{/admin/main}" class="header-text">后台管理</a></li>
+        </ul>
+    </div>
+    <div style="clear:both;"></div>
+</header>
+<div class="center" style="width: 700px;">
+    <div class="all-row" style="width: 600px">
+        <div class="row first-div">
+            <div class="all-title all first first-title">新闻标题</div>
+            <div class="all-type all  first" style="width: 400px;border:none;">新闻类型</div>
+        </div>
+        <div class="scroll-other">
+            <div th:if="${not #lists.isEmpty(allist)}"
+                 th:each="all, iterStat : ${allist}"
+                 class="row"
+                 th:classappend="${iterStat.odd}? 'one' : 'two'">
+                <div class="all-title all">
+                    <a th:href="@{'/user/detail/'+${all.id}}"
+                       th:class="${iterStat.odd}? 'detail a-one' : 'detail a-two'"
+                       th:style="'width: 384px;'"
+                       th:text="${all.title}"
+                       th:title="${all.title}">Title</a>
+                </div>
+                <div class="all-type all"
+                     th:classappend="${iterStat.odd}? 'a-one' : 'a-two'"
+                     th:style="'width: 400px;border:none;'"
+                     th:text="${all.type}">Type</div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

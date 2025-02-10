@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.web.mapper.NewsdetailMapper">
+    <select id="selectNewsById" resultType="AllNews" parameterType="AllNews">
+        select *
+        from newsdetail
+        where id = #{id}
+    </select>
+
+    <select id="selectNewsList" resultType="AllNews" parameterType="AllNews">
+        select *
+        from newsdetail
+    </select>
+
+    <select id="selectNewsByKeyword" resultType="AllNews" parameterType="AllNews">
+        select id, title, author, time
+        from newsdetail
+        <where>
+            <choose>
+                <when test="row == 'title'">
+                    title LIKE CONCAT('%', #{keyword}, '%')
+                </when>
+                <when test="row == 'author'">
+                    author LIKE CONCAT('%', #{keyword}, '%')
+                </when>
+                <when test="row == 'content'">
+                    content LIKE CONCAT('%', #{keyword}, '%')
+                </when>
+                <otherwise>
+                    (title LIKE CONCAT('%', #{keyword}, '%')
+                    OR author LIKE CONCAT('%', #{keyword}, '%')
+                    OR content LIKE CONCAT('%', #{keyword}, '%'))
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <select id="selectUserByName" resultType="UserMessage">
+        select id
+        from admin
+        where adminname = #{username} and adminpass = #{password}
+    </select>
+
+    <select id="selectNewsCountByNewsdetail" resultType="int" parameterType="AllNews">
+        select count(*)
+        from newsdetail
+    </select>
+
+    <insert id="insertNews" parameterType="AllNews">
+        INSERT INTO newsdetail (id, title, author, type, content, time)
+        VALUES (#{id}, #{title}, #{author}, #{type}, #{content}, #{time})
+    </insert>
+
+    <select id="selectUserMessageByUsername" resultType="UserMessage" parameterType="UserMessage">
+        select adminname
+        from admin
+        where adminname = #{username}
+    </select>
+
+    <update id="updataNewsByPrimaryKey" parameterType="AllNews">
+        UPDATE newsdetail
+        SET title = #{title}, author = #{author}, type = #{type}, content = #{content} WHERE id = #{id}
+    </update>
+
+    <delete id="deleteNewsByPrimaryKey" parameterType="int">
+        delete from newsdetail
+        where id = #{id}
+    </delete>
+</mapper>

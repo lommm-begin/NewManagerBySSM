@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>新闻中心-管理员-编辑新闻</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/add.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/login-message.css}">
+</head>
+<body>
+<header>
+    <span class="span-head">新闻管理系统</span>
+    <div class="header-search">
+        <form class="header-form" th:action="@{/admin/Search}">
+            <div class="search">
+                <div>
+                    <select name="row" style="height: 30px; width: 60px; border-radius: 8px; border: none; background: none;">
+                        <option value="all" selected>全部：</option>
+                        <option value="title">标题：</option>
+                        <option value="author">作者：</option>
+                        <option value="content">内容：</option>
+                    </select>
+                    <input type="text" class="text-search" name="keyword" maxlength="50" style="font-size: 15px;">
+                </div>
+                <div>
+                    <input type="submit" value="搜索" class="butt">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="ulf">
+        <ul>
+            <li><a th:href="@{/admin/main}" class="header-text">所有新闻</a></li>
+            <li><a th:href="@{/admin/addNew}" class="header-text">添加新闻</a></li>
+            <li><a th:href="@{/user/login}" class="header-text">系统登录</a></li>
+            <li><a th:href="@{/}" class="header-text">新闻主页</a></li>
+        </ul>
+    </div>
+    <div style="clear:both;"></div>
+</header>
+<div class="big-left">
+    <div class="admin-message">
+        <div class="hello">欢迎你:</div>
+        <span class="adminname" th:text="${session.adminname}"></span>
+        <div class="box"></div>
+        <div class="login-time"><a th:href="@{/admin/exit}">退出登录</a></div>
+    </div>
+</div>
+<div class="center">
+    <div class="container" th:if="${allist != null}">
+        <!-- 添加新闻的表单 -->
+        <div class="add-news-form">
+            <h2>编辑新闻(编号：[[${allist.id}]])
+                <span>
+                    <a th:href="@{'/admin/deleteNew/' + ${allist.id}}" class="detail" onclick="del(event)">删除</a>
+                </span>
+            </h2>
+            <form th:action="@{/admin/CommitUpdateNew}" method="post">
+                <input type="hidden" name="_method" value="put">
+                <input type="hidden" name="id" th:value="${allist.id}">
+                <div>
+                    <!-- 新闻标题 -->
+                    <label for="newsTitle">新闻标题：</label>
+                    <input type="text" id="newsTitle" name="Title" required maxlength="50" th:value="${allist.title}">
+
+                    <!-- 新闻类型 -->
+                    <label for="newsType">新闻类型：</label>
+                    <select name="Type" id="newsType" required style="font-size:17px;">
+                        <option value="1" th:selected="${allist.type == '1'}">金融</option>
+                        <option value="2" th:selected="${allist.type == '2'}">餐饮</option>
+                        <option value="3" th:selected="${allist.type == '3'}">科技</option>
+                        <option value="4" th:selected="${allist.type == '4'}">生活</option>
+                        <option value="5" th:selected="${allist.type == '5'}">娱乐</option>
+                        <option value="6" th:selected="${allist.type == '6'}">知识</option>
+                        <option value="7" th:selected="${allist.type == '7'}">其他</option>
+                    </select>
+
+                    <!-- 新闻作者 -->
+                    <label for="newsAuthor">新闻作者：</label>
+                    <input type="text" id="newsAuthor" name="Author" required maxlength="50" th:value="${allist.author}"/>
+
+                    <!-- 新闻内容 -->
+                    <label for="newsContent">新闻内容：</label>
+                    <textarea id="newsContent" name="Content" rows="10" cols="50" required maxlength="4000" th:text="${allist.content}"></textarea>
+
+                    <!-- 提交和取消按钮 -->
+                    <div class="but-all">
+                        <input type="submit" class="but first-but" value="编辑提交"/>
+                        <a th:href="@{/admin/main}" class="but two-but">返回</a>
+                        <div class="but time"><span style="font-size: 18px;">发布时间</span><span style="color: #AB3F6E; font-size: 18px;" th:text="${allist.time}">时间</span></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div style="display: none">
+    <form method="post" id="delForm">
+        <input type="hidden" name="_method" value="delete"/>
+    </form>
+</div>
+<script>
+    function del(event){
+        // 获取表单
+        let delForm = document.getElementById("delForm");
+        // 设置表单action
+        delForm.action = event.target.href;
+        if(window.confirm("您确定要删除吗？")){
+            // 提交表单
+            delForm.submit();
+        }
+        // 阻止超链接默认行为
+        event.preventDefault();
+    }
+</script>
+</body>
+</html>

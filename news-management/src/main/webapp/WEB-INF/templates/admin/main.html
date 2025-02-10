@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>新闻中心-管理员-所有新闻</title>
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/header.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/main.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/login-message.css}">
+</head>
+<body>
+	<header>
+		<span class="span-head">新闻管理系统</span>
+		<div class="header-search">
+			<form class="header-form" th:action="@{/admin/Search}">
+				<div class="search">
+					<div>
+						<select name="row" style="height: 30px; width: 60px; border-radius: 8px; border: none; background: none;">
+							<option value="all" selected>全部：</option>
+							<option value="title">标题：</option>
+							<option value="author">作者：</option>
+							<option value="content">内容：</option>
+						</select>
+						<input type="text" class="text-search" name="keyword" maxlength="50" style="font-size: 15px;">
+					</div>
+					<div>
+						<input type="submit" value="搜索" class="butt">
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="ulf">
+			<ul>
+				<li><a th:href="@{/admin/main}" class="header-text fresh">刷新</a></li>
+				<li><a th:href="@{/admin/addNew}" class="header-text">添加新闻</a></li>
+				<li><a th:href="@{/user/login}" class="header-text">系统登录</a></li>
+				<li><a th:href="@{/}" class="header-text">新闻主页</a></li>
+			</ul>
+		</div>
+		<div style="clear:both;"></div>
+	</header>
+	<div class="big-left">
+		<div class="admin-message">
+			<div class="hello">欢迎你:</div>
+			<span class="adminname" th:text="${session.adminname}"></span>
+			<div class="box"></div>
+			<div class="login-time"><a th:href="@{/admin/exit}">退出登录</a></div>
+		</div>
+	</div>
+	<div class="center">
+		<div class="all-row">
+			<div class="row first-div">
+				<div class="all-title all first">新闻标题</div>
+				<div class="all-author all first">作者信息</div>
+				<div class="all-type all first">新闻类型</div>
+				<div class="all-time all first">发布时间</div>
+				<div class="all-del all first">是否删除</div>
+				<div class="all-edit all first">是否编辑</div>
+			</div>
+			<div class="scroll-other">
+				<div th:if="${allist != null}" th:each="all, iterStat : ${allist}"
+					 class="row" th:classappend="${iterStat.odd}? 'one' : 'two'">
+					<div class="all-title all">
+						<a th:href="@{${'/Detail?id=' + all.id}}"
+						   class="detail a-title" th:classappend="${iterStat.odd}? 'a-one' : 'a-two'"
+						   th:style="'width: 384px;'" th:text="${all.title}">Title</a>
+					</div>
+					<div class="all-author all" th:classappend="${iterStat.odd}? 'a-one' : 'a-two'" th:text="${all.author}">Author</div>
+					<div class="all-type all" th:classappend="${iterStat.odd}? 'a-one' : 'a-two'" th:text="${all.type}">Type</div>
+					<div class="all-time all" th:classappend="${iterStat.odd}? 'a-one' : 'a-two'" th:text="${all.time}">Time</div>
+					<div class="all-del all" th:classappend="${iterStat.odd}? 'a-one' : 'a-two'">
+						<a th:href="@{${'/admin/deleteNew/' + all.id}}" class="detail"  onclick="del(event)">删除</a>
+					</div>
+					<div class="all-edit all" th:classappend="${iterStat.odd}? 'a-one' : 'a-two'">
+						<a th:href="@{${'/admin/editNew?id=' + all.id}}" class="detail">编辑</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="display: none">
+		<form method="post" id="delForm">
+			<input type="hidden" name="_method" value="delete"/>
+		</form>
+	</div>
+	<script>
+		function del(event){
+			// 获取表单
+			let delForm = document.getElementById("delForm");
+			// 设置表单action
+			delForm.action = event.target.href;
+			if(window.confirm("您确定要删除吗？")){
+				// 提交表单
+				delForm.submit();
+			}
+			// 阻止超链接默认行为
+			event.preventDefault();
+		}
+	</script>
+</body>
+</html>

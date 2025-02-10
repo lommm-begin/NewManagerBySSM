@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>新闻中心-搜索结果</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/search.css}">
+
+</head>
+<body>
+<header>
+    <span class="span-head">新闻管理系统</span>
+    <div class="header-search">
+        <form class="header-form" th:action="@{/admin/Search}">
+            <div class="search">
+                <select name="row" style="height: 30px; width: 60px; border-radius: 8px; border: none; background: none">
+                    <option value="all" th:selected="${row == 'all'}">全部：</option>
+                    <option value="title" th:selected="${row == 'title'}">标题：</option>
+                    <option value="author" th:selected="${row == 'author'}">作者：</option>
+                    <option value="content" th:selected="${row == 'content'}">内容：</option>
+                </select>
+                <div>
+                    <input type="text" class="text-search" name="keyword" maxlength="50" th:value="${keyword}" style="font-size: 15px;">
+                </div>
+                <div>
+                    <input type="submit" value="搜索" class="butt">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="ulf">
+        <ul>
+            <li><a th:href="@{/user/allNew}" class="header-text">所有新闻</a></li>
+            <li><a th:href="@{/admin/main}" class="header-text">后台管理</a></li>
+        </ul>
+    </div>
+    <div style="clear:both;"></div>
+</header>
+<div class="center">
+    <!-- 这里写内容 -->
+    <div class="all-row" th:if="${allist != null and not #lists.isEmpty(allist)}">
+        <div>
+            <div class="row" style="background-color: orange;">
+                <div class="all-title all first" style="border: none">新闻标题</div>
+                <div class="all-author all first" style="border: none">作者信息</div>
+                <div class="all-time all first" style="border: none">发布时间</div>
+            </div>
+        </div>
+        <div style="overflow: auto; height: 400px;">
+            <div th:each="all, iterStat: ${allist}">
+                <div class="row"
+                     th:classappend="${iterStat.odd}? 'a-one two' : 'a-two one'">
+                    <div class="all-title all a-two">
+                        <a th:href="@{'/user/detail/'+${all.id}}" class="detail a-two" th:text="${all.title}">新闻标题</a>
+                    </div>
+                    <div class="all-author all a-two" th:text="${all.author}">作者名</div>
+                    <div class="all-time all a-two" th:text="${all.actualTime}">发布时间</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="show-search first-div all" th:if="${allist == null or #lists.isEmpty(allist)}" style="margin: 0 auto; width: 600px; margin-top: 15px;">
+        您搜索的新闻关键字不存在！
+    </div>
+</div>
+</body>
+</html>
