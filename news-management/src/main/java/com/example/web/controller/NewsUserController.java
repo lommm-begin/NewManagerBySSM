@@ -5,20 +5,17 @@ import com.example.web.pojo.AllNews;
 import com.example.web.pojo.UserMessage;
 import com.example.web.service.NewsService;
 import com.example.web.util.encryption.EncryptionUtil;
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.thymeleaf.model.IModel;
 
-import javax.swing.*;
 import java.util.List;
 
 @Controller
@@ -27,8 +24,18 @@ import java.util.List;
 public class NewsUserController {
 
     @Autowired
-    @Qualifier("newsServiceByMybatisImpl")
+    private DaoContextHandler daoContextHandler;
+
+    //获取对应的Dao实现类
+    @Value("${Dao.daoDefault}")
+    String daoDefault;
+
     private NewsService newsService;
+
+    @PostConstruct
+    public void init() {
+        this.newsService = daoContextHandler.setNewsService(daoDefault).getNewsService();
+    }
 
     /**
      * 新闻细节页面

@@ -3,12 +3,14 @@ package com.example.web.controller;
 import com.example.web.pojo.AllNews;
 import com.example.web.service.NewsService;
 import com.example.web.util.TimeToStringUtil;
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +22,18 @@ import java.util.List;
 public class NewsAdminController {
 
     @Autowired
-    @Qualifier("newsServiceByMybatisImpl")
+    private DaoContextHandler daoContextHandler;
+
+    //获取对应的Dao实现类
+    @Value("${Dao.daoDefault}")
+    String daoDefault;
+
     private NewsService newsService;
+
+    @PostConstruct
+    public void init() {
+        this.newsService = daoContextHandler.setNewsService(daoDefault).getNewsService();
+    }
 
     /**
      * 搜索内容
