@@ -69,12 +69,22 @@ public class SpringMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(newsInterceptor())
-                .addPathPatterns("/admin/**");
+        //输出
         registry.addInterceptor(new ControllerStatisticsInterceptor())
                 .addPathPatterns("/**");
+
+        //拦截管理搜索页面
         registry.addInterceptor(new SearchInterceptor())
-                .addPathPatterns("/admin/adminSearch");
+                .addPathPatterns("/admin/Search");
+
+        //拦截未登录用户
+        registry.addInterceptor(newsInterceptor())
+                .addPathPatterns("/admin/**")
+                .excludePathPatterns("/admin/Search", "/admin/main");
+
+        //拦截管理全部新闻页面
+        registry.addInterceptor(new AllNewsInterceptor())
+                .addPathPatterns("/admin/main");
     }
 
     @Override
