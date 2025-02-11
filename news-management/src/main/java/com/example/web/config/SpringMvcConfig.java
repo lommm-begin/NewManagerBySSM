@@ -80,11 +80,7 @@ public class SpringMvcConfig implements WebMvcConfigurer {
         //拦截未登录用户
         registry.addInterceptor(newsInterceptor())
                 .addPathPatterns("/admin/**")
-                .excludePathPatterns("/admin/Search", "/admin/main");
-
-        //拦截管理全部新闻页面
-        registry.addInterceptor(new AllNewsInterceptor())
-                .addPathPatterns("/admin/main");
+                .excludePathPatterns("/admin/Search");
     }
 
     @Override
