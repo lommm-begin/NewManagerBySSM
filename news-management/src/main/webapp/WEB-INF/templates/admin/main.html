@@ -60,7 +60,7 @@
 				<div th:if="${allist != null}" th:each="all, iterStat : ${allist}"
 					 class="row" th:classappend="${iterStat.odd}? 'one' : 'two'">
 					<div class="all-title all">
-						<a th:href="@{${'/Detail?id=' + all.id}}"
+						<a th:href="@{${'/user/detail/' + all.id}}"
 						   class="detail a-title" th:classappend="${iterStat.odd}? 'a-one' : 'a-two'"
 						   th:style="'width: 384px;'" th:text="${all.title}">Title</a>
 					</div>
