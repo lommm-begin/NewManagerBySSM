@@ -19,7 +19,9 @@ public class SearchInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession(false);
 
         if (session != null) {
-            return true;
+            if (session.getAttribute("adminname") != null) {
+                return true;
+            }
         }
 
         request.getRequestDispatcher("/user/search").forward(request, response);
