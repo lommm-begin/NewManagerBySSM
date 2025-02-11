@@ -74,6 +74,11 @@ public class NewsAdminController {
         return "admin/addNew";
     }
 
+    /**
+     * 提交新增
+     * @param allNews
+     * @return
+     */
     @PostMapping("/CommitNew")
     public String commitNew(AllNews allNews) {
 
@@ -83,7 +88,7 @@ public class NewsAdminController {
             e.printStackTrace();
         }
 
-        return "redirect: /admin/main";
+        return "redirect:/admin/main";
     }
 
     /**
@@ -126,6 +131,12 @@ public class NewsAdminController {
         return "redirect:/admin/main";
     }
 
+    /**
+     * 退出登录，删除cookie和结束session对象
+     * @param request
+     * @param response
+     * @return
+     */
     @GetMapping("/exit")
     public String exit(HttpServletRequest request, HttpServletResponse response) {
         Cookie loginCookie = new Cookie("username", null);
