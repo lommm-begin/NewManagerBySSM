@@ -52,6 +52,7 @@
 			<div class="add-news-form">
 				<h2>添加新闻</h2>
 				<form th:action="@{/admin/CommitNew}" method="post">
+					<input type="hidden" name="time" th:value="${nowTime}">
 					<!-- 新闻标题 -->
 					<label for="newsTitle">新闻标题：</label>
 					<input type="text" id="newsTitle" name="Title" required maxlength="50">
