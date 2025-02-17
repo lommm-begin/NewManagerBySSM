@@ -53,7 +53,7 @@
         VALUES (#{id}, #{title}, #{author}, #{type}, #{content}, #{time})
     </insert>
 
-    <select id="selectUserMessageByUsername" resultType="UserMessage" parameterType="UserMessage">
+    <select id="selectUserMessageByUsername" resultType="UserMessage" parameterType="String">
         select adminname
         from admin
         where adminname = #{username}
