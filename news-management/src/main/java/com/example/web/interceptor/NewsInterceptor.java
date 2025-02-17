@@ -36,19 +36,20 @@ public class NewsInterceptor implements HandlerInterceptor {
             for (Cookie cookie : a) {
                 if ((cookie.getName()).equals("username")) {
                     adminname = cookie.getValue();
+                    //解密用户名
                     adminnameAfter = EncryptionUtil.decryptUserName(adminname);
                     UserMessage userMessage = this.newsdetailMapper.selectUserMessageByUsername(adminnameAfter);
 
-                    if (userMessage != null) {
-                        adminnameAfter = cookie.getValue();
-                        if (session != null) {
-                            session.setAttribute("adminname", adminnameAfter);
-                        } else {
-                            request.getSession().setAttribute("adminname", adminnameAfter);
-                        }
 
-                        break;
+                    if (session != null) {
+                        session.setAttribute("userMessage", adminnameAfter);
+                        return true;
                     }
+
+                    HttpSession sessionAfter = request.getSession();
+                    sessionAfter.setAttribute("adminname", adminnameAfter);
+
+                    break;
                 }
             }
         }
